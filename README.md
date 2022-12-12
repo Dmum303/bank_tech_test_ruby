@@ -61,15 +61,16 @@ date || credit || debit || balance
 - have if deposit or withdrawl
 - throw an error if incorrect data type added
 
+```
                 input         | output
                 ------------- | -------------
                 date obj      | date obj
                 non date obj  | error
                 int or float  | int or float - to 2 decimal places
               other data type | error
-
   deposit/withdrawl as string | no error
-  any other data type | error
+          any other data type | error
+```
 
 2. A class to which can process the transactions and produce a
    statement showing the effect of all transactions on user's bank balance. Will need to:
