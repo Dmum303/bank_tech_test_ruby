@@ -23,7 +23,7 @@
 
 ### To run tests: cd into the spec directory and run command:
 
-- rspec
+- rspec ../spec
 
 ## Project Requirements
 
