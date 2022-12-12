@@ -1,6 +1,6 @@
 # {{bank_tech_test_ruby}}
 
-# setup
+# Setup
 
 - clone this directory to your local machine and cd into the project folder
 
@@ -20,7 +20,7 @@
 - bundle add rspec
 - rspec --init
 
-# to run tests cd into the spec directory and run
+# To run tests: cd into the spec directory and run command:
 
 - rspec
 
