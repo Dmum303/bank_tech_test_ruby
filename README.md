@@ -2,20 +2,21 @@
 
 # Setup
 
-- clone this directory to your local machine and cd into the project folder
+- This project is written in ruby and tested with rspec
+- First clone this directory to your local machine and cd into the project folder
 
 # If you don't have ruby version manager installed
 
 - https://rvm.io/ to install RVM.
 
-# Then, we're going to get you the latest Ruby, run these comands in
+# Then, get the latest Ruby, run:
 
 - rvm get stable
 - rvm use ruby --latest --install --default
 - gem install bundler
 - bundle init
 
-# Make sure you can test
+# Make sure you can test using rspec
 
 - bundle add rspec
 - rspec --init
@@ -58,7 +59,7 @@ date || credit || debit || balance
 - store date of trans
 - have amount to 2 decimal places
 - have if deposit or withdrawl
-- trow an error if incorrect data type added
+- throw an error if incorrect data type added
 
                 input         | output
                 ------------- | -------------
