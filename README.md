@@ -1,38 +1,38 @@
 # {{bank_tech_test_ruby}}
 
-# Setup
+## Setup
 
 - This project is written in ruby and tested with rspec
 - First clone this directory to your local machine and cd into the project folder
 
-# If you don't have ruby version manager installed
+### If you don't have ruby version manager installed
 
 - https://rvm.io/ to install RVM.
 
-# Then, get the latest Ruby, run:
+### Then, get the latest Ruby, run:
 
 - rvm get stable
 - rvm use ruby --latest --install --default
 - gem install bundler
 - bundle init
 
-# Make sure you can test using rspec
+### Make sure you can test using rspec
 
 - bundle add rspec
 - rspec --init
 
-# To run tests: cd into the spec directory and run command:
+### To run tests: cd into the spec directory and run command:
 
 - rspec
 
-# Project Requirements
+## Project Requirements
 
 You should be able to interact with your code via a REPL like IRB or Node. (You don't need to implement a command line interface that takes input from STDIN.)
 Deposits, withdrawal.
 Account statement (date, amount, balance) printing.
 Data can be kept in memory (it doesn't need to be stored to a database or anything).
 
-# Input
+### Input
 
 **Given** a client makes a deposit of 1000 on 10-01-2023  
 **And** a deposit of 2000 on 13-01-2023  
@@ -40,7 +40,7 @@ Data can be kept in memory (it doesn't need to be stored to a database or anythi
 **When** she prints her bank statement  
 **Then** she would see
 
-# Output
+### Output
 
 When she prints her bank statement
 Then she would see
@@ -52,7 +52,7 @@ date || credit || debit || balance
 10/01/2023 || 1000.00 || || 1000.00
 ```
 
-# Class system
+## Class system
 
 1. A class to store info for each transaction, will need to:
 
@@ -84,7 +84,7 @@ date || credit || debit || balance
 
   this class will only take transaction class objects and will throw an error if other info is added
 
-# things to look up
+## things to look up
 
 doubles
 errors
