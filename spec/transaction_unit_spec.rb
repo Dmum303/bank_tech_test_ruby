@@ -21,5 +21,23 @@ RSpec.describe Transaction do
     expect { transaction.check_input }.to raise_error(
       "Error: only input integers or floats"
     )
+    transaction2 = Transaction.new([])
+    expect { transaction2.check_input }.to raise_error(
+      "Error: only input integers or floats"
+    )
+    transaction3 = Transaction.new(true)
+    expect { transaction3.check_input }.to raise_error(
+      "Error: only input integers or floats"
+    )
   end
+
+  it "Return amount ok if amount is correct data type" do
+    transaction = Transaction.new(25)
+    expect(transaction.check_input).to eq("Ok")
+    transaction_2 = Transaction.new(0.46)
+    expect(transaction_2.check_input).to eq("Ok")
+  end
+
+  #   it "Throws an error if there are more than 2 decimal places"
+  #   transaction2 = Transaction.new(true)
 end

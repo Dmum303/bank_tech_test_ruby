@@ -8,7 +8,9 @@ class Transaction
   end
 
   def check_input
-    if $amount != Integer || $amount != Float
+    if $amount.is_a? Integer or $amount.is_a? Float
+      "Ok"
+    else
       fail "Error: only input integers or floats"
     end
   end
