@@ -1,12 +1,37 @@
 # {{bank_tech_test_ruby}}
 
-Requirements
+# setup
+
+- clone this directory to your local machine and cd into the project folder
+
+# If you don't have ruby version manager installed
+
+- https://rvm.io/ to install RVM.
+
+# Then, we're going to get you the latest Ruby, run these comands in
+
+- rvm get stable
+- rvm use ruby --latest --install --default
+- gem install bundler
+- bundle init
+
+# Make sure you can test
+
+- bundle add rspec
+- rspec --init
+
+# to run tests cd into the spec directory and run
+
+- rspec
+
+# Project Requirements
+
 You should be able to interact with your code via a REPL like IRB or Node. (You don't need to implement a command line interface that takes input from STDIN.)
 Deposits, withdrawal.
 Account statement (date, amount, balance) printing.
 Data can be kept in memory (it doesn't need to be stored to a database or anything).
 
-# input
+# Input
 
 **Given** a client makes a deposit of 1000 on 10-01-2023  
 **And** a deposit of 2000 on 13-01-2023  
@@ -14,7 +39,7 @@ Data can be kept in memory (it doesn't need to be stored to a database or anythi
 **When** she prints her bank statement  
 **Then** she would see
 
-# output
+# Output
 
 When she prints her bank statement
 Then she would see
