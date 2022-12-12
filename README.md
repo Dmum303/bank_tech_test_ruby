@@ -1,76 +1,59 @@
-# bank_tech_test_ruby
+# {{bank_tech_test_ruby}}
 
-{{PROBLEM}} Multi-Class Planned Design Recipe
+Requirements
+You should be able to interact with your code via a REPL like IRB or Node. (You don't need to implement a command line interface that takes input from STDIN.)
+Deposits, withdrawal.
+Account statement (date, amount, balance) printing.
+Data can be kept in memory (it doesn't need to be stored to a database or anything).
 
-1. Describe the Problem
-   Put or write the user story here. Add any clarifying notes you might have.
+# input
 
-2. Design the Class System
-   Consider diagramming out the classes and their relationships. Take care to focus on the details you see as important, not everything. The diagram below uses asciiflow.com but you could also use excalidraw.com, draw.io, or miro.com
+Given a client makes a deposit of 1000 on 10-01-2023
+And a deposit of 2000 on 13-01-2023
+And a withdrawal of 500 on 14-01-2023
 
-┌────────────────────────────┐
-│ MusicPlayer │
-│ │
-│ - add(track) │
-│ - all │
-│ - search_by_title(keyword) │
-│ => [tracks...] │
-└───────────┬────────────────┘
-│
-│ owns a list of
-▼
-┌─────────────────────────┐
-│ Track(title, artist) │
-│ │
-│ - title │
-│ - artist │
-│ - format │
-│ => "TITLE by ARTIST" │
-└─────────────────────────┘
-Also design the interface of each class in more detail.
+# output
 
-class MusicLibrary
-def initialize # ...
-end
+When she prints her bank statement
+Then she would see
+date || credit || debit || balance
+14/01/2023 || || 500.00 || 2500.00
+13/01/2023 || 2000.00 || || 3000.00
+10/01/2023 || 1000.00 || || 1000.00
 
-def add(track) # track is an instance of Track # Track gets added to the library # Returns nothing
-end
+# Class system
 
-def all # Returns a list of track objects
-end
+1. A class to store info for each transaction, will need to:
 
-def search_by_title(keyword) # keyword is a string # Returns a list of tracks with titles that include the keyword
-end
-end
+- store date of trans
+- have amount to 2 decimal places
+- have if deposit or withdrawl
+- trow an error if incorrect data type added
 
-class Track
-def initialize(title, artist) # title and artist are both strings
-end
+                input         | output
+                ------------- | -------------
+                date obj      | date obj
+                non date obj  | error
+                int or float  | int or float - to 2 decimal places
+              other data type | error
 
-def format # Returns a string of the form "TITLE by ARTIST"
-end
-end 3. Create Examples as Integration Tests
-Create examples of the classes being used together in different situations and combinations that reflect the ways in which the system will be used.
+  deposit/withdrawl as string | no error
+  any other data type | error
 
-# EXAMPLE
+2. A class to which can process the transactions and produce a
+   statement showing the effect of all transactions on user's bank balance. Will need to:
 
-# Gets all tracks
+- be able to store transactions
+- change transaction into into a format which can be used in a statement - string?
+- keep a running total of account balance.
+- sorts transactions by date
+- return a statement in the correct format
+- throw an error if incorrect information inputted.
 
-library = MusicLibrary.new
-track_1 = Track.new("Carte Blanche", "Veracocha")
-track_2 = Track.new("Synaesthesia", "The Thrillseekers")
-library.add(track_1)
-library.add(track_2)
-library.all # => [track_1, track_2] 4. Create Examples as Unit Tests
-Create examples, where appropriate, of the behaviour of each relevant class at a more granular level of detail.
+  this class will only take transaction class objects and will throw an error if other info is added
 
-# EXAMPLE
+# things to look up
 
-# Constructs a track
-
-track = Track.new("Carte Blanche", "Veracocha")
-track.title # => "Carte Blanche"
-Encode each example as a test. You can add to the above list as you go.
-
-5. Implement the Behaviour
-   After each test you write, follow the test-driving process of red, green, refactor to implement the behaviour.
+doubles
+errors
+how to check if something is of a certain class
