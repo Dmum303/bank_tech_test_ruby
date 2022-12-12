@@ -14,4 +14,14 @@ class Transaction
       fail "Error: only input integers or floats"
     end
   end
+
+  def two_decimal_places(amount)
+    regex = /^[0-9]*(\.[0-9]{0,2})?$/
+    number_to_string = amount.to_s
+    if number_to_string.match(regex) != nil
+      "ok"
+    else
+      fail "Error: only input floats to two decimal places"
+    end
+  end
 end

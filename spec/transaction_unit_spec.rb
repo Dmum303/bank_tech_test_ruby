@@ -38,6 +38,12 @@ RSpec.describe Transaction do
     expect(transaction_2.check_input).to eq("Ok")
   end
 
-  #   it "Throws an error if there are more than 2 decimal places"
-  #   transaction2 = Transaction.new(true)
+  it "Throws an error if there are more than 2 decimal places" do
+    transaction = Transaction.new(true)
+    expect(transaction.two_decimal_places(0.34)).to eq "ok"
+    expect(transaction.two_decimal_places(0.2)).to eq "ok"
+    expect {
+      transaction.two_decimal_places(0.5768)
+    }.to eq raise_error "Error: only input floats to two decimal places"
+  end
 end
