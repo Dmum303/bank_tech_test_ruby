@@ -93,6 +93,10 @@ RSpec.describe Transaction do
       }.to raise_error "Error: date must be a string input in dd-mm-year format"
       transaction_3 = Transaction.new(25, "13-23-2001")
       expect(transaction_3.is_date_string?).to eq "Ok"
+      transaction_4 = Transaction.new(25)
+      expect {
+        transaction_4.is_date_string?
+      }.to raise_error "Error: date must be a string input in dd-mm-year format"
     end
 
     it "Converts string date to date object" do
@@ -120,8 +124,12 @@ RSpec.describe Transaction do
       expect {
         transaction_2.check_type_correct
       }.to raise_error "Error: only input credit or debit"
-      transaction_3 = Transaction.new(25, "03-02-2001", "debit")
-      expect(transaction_3.check_type_correct).to eq "Ok"
+      transaction_3 = Transaction.new(25, "03-02-2001")
+      expect {
+        transaction_3.check_type_correct
+      }.to raise_error "Error: only input credit or debit"
+      transaction_4 = Transaction.new(25, "03-02-2001", "debit")
+      expect(transaction_4.check_type_correct).to eq "Ok"
     end
   end
 
@@ -133,7 +141,4 @@ RSpec.describe Transaction do
   end
 
   #if fields empty fail test
-  #private methods
-  #a method that runs all checks and makes sure everything is formatted
-  #that methods are in a logical order
 end

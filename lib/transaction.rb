@@ -1,6 +1,6 @@
 require "date"
 class Transaction
-  def initialize(amount, date = nil, type = nil)
+  def initialize(amount = nil, date = nil, type = nil)
     $amount = amount
     $string_date = date
     $type = type
