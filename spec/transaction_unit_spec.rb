@@ -62,9 +62,22 @@ RSpec.describe Transaction do
       expect(transaction.show_string_date).to eq nil
     end
 
-    it "Can check if date is in correct format" do
+    it "returns true if date is in correct format" do
       transaction = Transaction.new(25, "03-02-2001")
-      expect(tansaction.date_valid?).to eq true
+      expect(transaction.date_valid?).to eq true
+      transaction_2 = Transaction.new(25, "31-12-4600")
+      expect(transaction_2.date_valid?).to eq true
+    end
+
+    it "returns false if date is in correct format" do
+      transaction_1 = Transaction.new(25, "56-02-2001")
+      expect(transaction_1.date_valid?).to eq false
+      transaction_2 = Transaction.new(25, "05-18-2001")
+      expect(transaction_2.date_valid?).to eq false
+      transaction_3 = Transaction.new(25, "13-23-2001")
+      expect(transaction_3.date_valid?).to eq false
+      transaction_4 = Transaction.new(25, "00-00-2001")
+      expect(transaction_4.date_valid?).to eq false
     end
   end
   #if fields empty fail test

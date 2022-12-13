@@ -1,3 +1,4 @@
+require "date"
 class Transaction
   def initialize(amount, date = nil)
     $amount = amount
@@ -31,9 +32,10 @@ class Transaction
   end
 
   def date_valid?
-    split_date_values_array = $string_date.split
-    year = split_date_values_array[2]
-    month = split_date_values_array[1]
-    day = split_date_values_array[0]
+    split_date_values_array = $string_date.split("-")
+    year = split_date_values_array[2].to_i
+    month = split_date_values_array[1].to_i
+    day = split_date_values_array[0].to_i
+    Date.valid_date?(year, month, day)
   end
 end
