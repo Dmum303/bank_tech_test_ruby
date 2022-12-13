@@ -7,7 +7,7 @@ class Transaction
     $amount
   end
 
-  def check_input
+  def check_amount_input
     if $amount.is_a? Integer or $amount.is_a? Float
       "Ok"
     else
@@ -15,11 +15,11 @@ class Transaction
     end
   end
 
-  def two_decimal_places(amount)
+  def two_decimal_places
     regex = /^[0-9]*(\.[0-9]{0,2})?$/
-    number_to_string = amount.to_s
+    number_to_string = $amount.to_s
     if number_to_string.match(regex) != nil
-      "ok"
+      "Ok"
     else
       fail "Error: only input floats to two decimal places"
     end
