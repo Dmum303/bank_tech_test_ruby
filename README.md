@@ -25,6 +25,18 @@
 
 - rspec ../spec
 
+or
+Setup
+If you don't already have it, clone the skills workshop repository.
+
+Do a git pull to make sure you have an up-to-date version of the repository.
+
+cd into the student-mocking-workshop directory.
+
+Run bundle install.
+
+Run the tests with rspec.
+
 ## Project Requirements
 
 You should be able to interact with your code via a REPL like IRB or Node. (You don't need to implement a command line interface that takes input from STDIN.)
@@ -34,10 +46,10 @@ Data can be kept in memory (it doesn't need to be stored to a database or anythi
 
 ### Input
 
-**Given** a client makes a deposit of 1000 on 10-01-2023  
-**And** a deposit of 2000 on 13-01-2023  
-**And** a withdrawal of 500 on 14-01-2023  
-**When** she prints her bank statement  
+**Given** a client makes a deposit of 1000 on 10-01-2023
+**And** a deposit of 2000 on 13-01-2023
+**And** a withdrawal of 500 on 14-01-2023
+**When** she prints her bank statement
 **Then** she would see
 
 ### Output
