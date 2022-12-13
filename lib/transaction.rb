@@ -1,10 +1,15 @@
 class Transaction
-  def initialize(amount)
+  def initialize(amount, date = nil)
     $amount = amount
+    $string_date = date
   end
 
   def show_amount
     $amount
+  end
+
+  def show_string_date
+    $string_date
   end
 
   def check_amount_input
@@ -23,5 +28,12 @@ class Transaction
     else
       fail "Error: only input floats to two decimal places"
     end
+  end
+
+  def date_valid?
+    split_date_values_array = $string_date.split
+    year = split_date_values_array[2]
+    month = split_date_values_array[1]
+    day = split_date_values_array[0]
   end
 end
