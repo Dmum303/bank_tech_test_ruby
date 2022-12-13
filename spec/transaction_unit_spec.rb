@@ -69,7 +69,7 @@ RSpec.describe Transaction do
       expect(transaction_2.date_valid?).to eq true
     end
 
-    it "returns false if date is in correct format" do
+    it "returns false if date is not correct format" do
       transaction_1 = Transaction.new(25, "56-02-2001")
       expect(transaction_1.date_valid?).to eq false
       transaction_2 = Transaction.new(25, "05-18-2001")
@@ -78,8 +78,60 @@ RSpec.describe Transaction do
       expect(transaction_3.date_valid?).to eq false
       transaction_4 = Transaction.new(25, "00-00-2001")
       expect(transaction_4.date_valid?).to eq false
+      transaction_5 = Transaction.new(25, "hello there")
+      expect(transaction_5.date_valid?).to eq false
+    end
+
+    it "Throws an error if date input is not string" do
+      transaction_1 = Transaction.new(25, 876_543)
+      expect {
+        transaction_1.is_date_string?
+      }.to raise_error "Error: date must be a string input in dd-mm-year format"
+      transaction_2 = Transaction.new(25, {})
+      expect {
+        transaction_2.is_date_string?
+      }.to raise_error "Error: date must be a string input in dd-mm-year format"
+      transaction_3 = Transaction.new(25, "13-23-2001")
+      expect(transaction_3.is_date_string?).to eq "Ok"
+    end
+
+    it "Converts string date to date object" do
+      transaction = Transaction.new(25, "03-02-2001")
+      expect(transaction.date_to_object.year).to eq 2001
+      expect(transaction.date_to_object.month).to eq 02
+      expect(transaction.date_to_object.day).to eq 03
     end
   end
+
+  context "Transaction type testing" do
+    it "Returns the type of the transaction" do
+      transaction = Transaction.new(25, "03-02-2001", "credit")
+      expect(transaction.show_transaction_type).to eq "credit"
+      transaction_2 = Transaction.new(25, "03-02-2001", "debit")
+      expect(transaction_2.show_transaction_type).to eq "debit"
+    end
+
+    it "Throws an error if type not debit or credit" do
+      transaction = Transaction.new(25, "03-02-2001", "Ahoy")
+      expect {
+        transaction.check_type_correct
+      }.to raise_error "Error: only input credit or debit"
+      transaction_2 = Transaction.new(25, "03-02-2001", [])
+      expect {
+        transaction_2.check_type_correct
+      }.to raise_error "Error: only input credit or debit"
+      transaction_3 = Transaction.new(25, "03-02-2001", "debit")
+      expect(transaction_3.check_type_correct).to eq "Ok"
+    end
+  end
+
+  context "Running all data checks" do
+    it "Returns true if all data input correctly" do
+      transaction = Transaction.new(25, "03-02-2001", "credit")
+      expect(transaction.check_all_data_input).to eq true
+    end
+  end
+
   #if fields empty fail test
   #private methods
   #a method that runs all checks and makes sure everything is formatted
