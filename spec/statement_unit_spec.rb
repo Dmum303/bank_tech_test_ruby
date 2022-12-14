@@ -44,16 +44,19 @@ RSpec.describe Statement do
       expect(statement.transaction_list[2]).to eq fake_transaction_3
     end
 
-    it "Formats object into string" do
-      fake_transaction =
-        double :fake_transaction,
-               show_amount: 300,
-               show_string_date: "03-04-2022",
-               date_to_object: Date.strptime("03-04-2022", "%d-%m-%Y"),
-               show_transaction_type: "credit"
-      statement = Statement.new
-      expect(statement.format_to_string(fake_transaction)).to eq
+    it "Running total returns total amount input" do
     end
+
+    # it "Formats object into string" do
+    #   fake_transaction =
+    #     double :fake_transaction,
+    #            show_amount: 300,
+    #            show_string_date: "03-04-2022",
+    #            date_to_object: Date.strptime("03-04-2022", "%d-%m-%Y"),
+    #            show_transaction_type: "credit"
+    #   statement = Statement.new
+    #   expect(statement.format_to_string(fake_transaction)).to eq '13/01/2023 || 2000.00 || || 3000.00'
+    # end
   end
 end
 
