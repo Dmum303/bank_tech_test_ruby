@@ -30,6 +30,10 @@ RSpec.describe Transaction do
       expect { transaction3.check_amount_input }.to raise_error(
         "Error: only input integers or floats"
       )
+      transaction4 = Transaction.new()
+      expect { transaction4.check_amount_input }.to raise_error(
+        "Error: only input integers or floats"
+      )
     end
 
     it "Return amount ok if amount is correct data type" do
@@ -64,22 +68,33 @@ RSpec.describe Transaction do
 
     it "returns true if date is in correct format" do
       transaction = Transaction.new(25, "03-02-2001")
-      expect(transaction.date_valid?).to eq true
+      expect(transaction.date_valid?).to eq "Ok"
       transaction_2 = Transaction.new(25, "31-12-4600")
-      expect(transaction_2.date_valid?).to eq true
+      expect(transaction_2.date_valid?).to eq "Ok"
     end
 
+    #this test
     it "returns false if date is not correct format" do
       transaction_1 = Transaction.new(25, "56-02-2001")
-      expect(transaction_1.date_valid?).to eq false
+      expect {
+        transaction_1.date_valid?
+      }.to raise_error "Error: incorrect date input"
       transaction_2 = Transaction.new(25, "05-18-2001")
-      expect(transaction_2.date_valid?).to eq false
+      expect {
+        transaction_2.date_valid?
+      }.to raise_error "Error: incorrect date input"
       transaction_3 = Transaction.new(25, "13-23-2001")
-      expect(transaction_3.date_valid?).to eq false
+      expect {
+        transaction_3.date_valid?
+      }.to raise_error "Error: incorrect date input"
       transaction_4 = Transaction.new(25, "00-00-2001")
-      expect(transaction_4.date_valid?).to eq false
+      expect {
+        transaction_4.date_valid?
+      }.to raise_error "Error: incorrect date input"
       transaction_5 = Transaction.new(25, "hello there")
-      expect(transaction_5.date_valid?).to eq false
+      expect {
+        transaction_5.date_valid?
+      }.to raise_error "Error: incorrect date input"
     end
 
     it "Throws an error if date input is not string" do
@@ -138,7 +153,24 @@ RSpec.describe Transaction do
       transaction = Transaction.new(25, "03-02-2001", "credit")
       expect(transaction.check_all_data_input).to eq true
     end
-  end
 
-  #if fields empty fail test
+    it "Throws the correct error if incorrect data input" do
+      transaction_1 = Transaction.new(25, [], "credit")
+      expect {
+        transaction_1.check_all_data_input
+      }.to raise_error "Error: date must be a string input in dd-mm-year format"
+      transaction_2 = Transaction.new("Heya!", "03-02-2001", "credit")
+      expect {
+        transaction_2.check_all_data_input
+      }.to raise_error "Error: only input integers or floats"
+      transaction_3 = Transaction.new(25, "03-54-2001", "credit")
+      expect {
+        transaction_3.check_all_data_input
+      }.to raise_error "Error: incorrect date input"
+      transaction_4 = Transaction.new(25, "03-02-2001", [])
+      expect {
+        transaction_4.check_all_data_input
+      }.to raise_error "Error: only input credit or debit"
+    end
+  end
 end

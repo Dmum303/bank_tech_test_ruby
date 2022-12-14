@@ -42,11 +42,16 @@ class Transaction
   end
 
   def date_valid?
+    is_date_string?
     split_date_values_array = $string_date.split("-")
     year = split_date_values_array[2].to_i
     month = split_date_values_array[1].to_i
     day = split_date_values_array[0].to_i
-    Date.valid_date?(year, month, day)
+    if Date.valid_date?(year, month, day)
+      "Ok"
+    else
+      fail "Error: incorrect date input"
+    end
   end
 
   def is_date_string?
@@ -67,7 +72,7 @@ class Transaction
 
   def check_all_data_input
     if check_amount_input == "Ok" && two_decimal_places == "Ok" &&
-         date_valid? && is_date_string? == "Ok" && check_type_correct == "Ok"
+         is_date_string? == "Ok" && date_valid? && check_type_correct == "Ok"
       true
     else
       false
