@@ -149,21 +149,39 @@ RSpec.describe Statement do
       statement.produce_statement[2]
     ).to eq "03/04/2022 || 300.00 || || 449.23"
   end
-end
 
-#   transaction_1_credit =
-#     object_double(
-#       :fake_transaction,
-#       show_amount: 300,
-#       show_string_date: "03-04-2022",
-#       date_to_object: Date.strptime("03-04-2022", "%d-%m-%Y"),
-#       show_transaction_type: "credit"
-#     ),
-#     transaction_2_credit =
-#       object_double(
-#         :fake_ransaction_2,
-#         show_amount: 50.50,
-#         show_string_date: "01-10-2021",
-#         date_to_object: Date.strptime("01-10-2021", "%d-%m-%Y"),
-#         show_transaction_type: "credit"
-#       )
+  it "Returns statement as string with correct header" do
+    fake_transaction_2 =
+      double :fake_transaction_2,
+             show_amount: 50.50,
+             show_string_date: "01-10-2021",
+             date_to_object: Date.strptime("01-10-2021", "%d-%m-%Y"),
+             show_transaction_type: "debit"
+    statement = Statement.new
+    statement.add(fake_transaction_2)
+    expect(
+      statement.return_statement
+    ).to eq "date || credit || debit || balance\n01/10/2021 || || 50.50 || -50.50"
+  end
+
+  it "Returns statement as string with correct header" do
+    fake_transaction =
+      double :fake_transaction,
+             show_amount: 300,
+             show_string_date: "03-04-2022",
+             date_to_object: Date.strptime("03-04-2022", "%d-%m-%Y"),
+             show_transaction_type: "credit"
+    fake_transaction_2 =
+      double :fake_transaction_2,
+             show_amount: 50.50,
+             show_string_date: "01-10-2021",
+             date_to_object: Date.strptime("01-10-2021", "%d-%m-%Y"),
+             show_transaction_type: "debit"
+    statement = Statement.new(1000)
+    statement.add(fake_transaction_2)
+    statement.add(fake_transaction)
+    expect(
+      statement.return_statement
+    ).to eq "date || credit || debit || balance\n01/10/2021 || || 50.50 || 949.50\n03/04/2022 || 300.00 || || 1249.50"
+  end
+end

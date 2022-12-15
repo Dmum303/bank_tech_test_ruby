@@ -49,4 +49,10 @@ class Statement
       $transactions.map { |transaction| format_to_string(transaction) }
     string_transactions_array
   end
+
+  def return_statement
+    final_statement = produce_statement
+    final_statement.unshift "date || credit || debit || balance"
+    final_statement.join("\n")
+  end
 end
