@@ -1,6 +1,7 @@
 class Statement
   def initialize
     $transactions = []
+    $running_total_counter = 0
   end
 
   def add(transaction)
@@ -17,6 +18,14 @@ class Statement
   end
 
   def running_total(transaction)
+    type = transaction.show_transaction_type
+    amount = transaction.show_amount
+    if type == "credit"
+      $running_total_counter += amount
+    else
+      $running_total_counter -= amount
+    end
+    $running_total_counter
   end
 end
 

@@ -44,8 +44,32 @@ RSpec.describe Statement do
       expect(statement.transaction_list[2]).to eq fake_transaction_3
     end
 
-    it "Running total returns total amount input" do
+    it "Running total adds one transaction and returns total amount input" do
+      fake_transaction =
+        double :fake_transaction,
+               show_amount: 300,
+               show_transaction_type: "credit"
+      statement = Statement.new
+      expect(statement.running_total(fake_transaction)).to eq 300
     end
+
+    it "Running total adds several transactions and returns total amount input" do
+      fake_transaction =
+        double :fake_transaction,
+               show_amount: 300,
+               show_transaction_type: "credit"
+      fake_transaction_2 =
+        double :fake_transaction_2,
+               show_amount: 45,
+               show_transaction_type: "debit"
+      statement = Statement.new
+      statement.running_total(fake_transaction)
+      statement.running_total(fake_transaction_2)
+      statement.running_total(fake_transaction)
+      expect(statement.running_total(fake_transaction_2)).to eq 510
+    end
+
+    # Do I want to bother with failing inputs on stement class? Nah I've sanitized
 
     # it "Formats object into string" do
     #   fake_transaction =
