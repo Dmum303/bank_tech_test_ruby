@@ -27,6 +27,18 @@ class Statement
     end
     $running_total_counter
   end
+
+  def format_to_string(transaction)
+    date_correct = transaction.show_string_date.gsub "-", "/"
+    amount = (transaction.show_amount.round(2)) + 0.00
+    total = (running_total(transaction).round(2)) + 0.00
+    if transaction.show_transaction_type == "credit"
+      "#{date_correct} || #{amount} || || #{total}"
+    else
+      "#{date_correct} || || #{amount} || #{total}"
+    end
+    # binding.irb
+  end
 end
 
 # stringTransaction(transactionObject, total) {
