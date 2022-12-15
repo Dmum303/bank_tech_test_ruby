@@ -140,14 +140,14 @@ RSpec.describe Statement do
              show_amount: 50.50,
              show_string_date: "01-10-2021",
              date_to_object: Date.strptime("01-10-2021", "%d-%m-%Y"),
-             show_transaction_type: "credit"
-    statement = Statement.new(250.65)
+             show_transaction_type: "debit"
+    statement = Statement.new(250.23)
     statement.add(fake_transaction)
     statement.add(fake_transaction_2)
     statement.add(fake_transaction_2)
     expect(
-      statement.produce_statement[-1]
-    ).to eq "03/04/2022 || 300.00 || || 449.65"
+      statement.produce_statement[2]
+    ).to eq "03/04/2022 || 300.00 || || 449.23"
   end
 end
 

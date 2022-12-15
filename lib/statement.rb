@@ -46,22 +46,7 @@ class Statement
   def produce_statement
     sort_by_date
     string_transactions_array =
-      $transactions.map do |transaction|
-        format_to_string(transaction)
-        binding.irb
-      end
+      $transactions.map { |transaction| format_to_string(transaction) }
     string_transactions_array
-    # binding.irb
   end
 end
-
-# stringTransaction(transactionObject, total) {
-#   let date = transactionObject.formattedDate;
-#   let amount = transactionObject.amount.toFixed(2);
-#   let type = transactionObject.type;
-#   if (type === 'credit') {
-#     return date + ' || ' + amount + ' || || ' + total.toFixed(2);
-#   } else if (type === 'debit') {
-#     return date + ' || || ' + amount + ' || ' + total.toFixed(2);
-#   }
-# }
