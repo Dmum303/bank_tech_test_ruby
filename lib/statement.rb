@@ -1,7 +1,7 @@
 class Statement
-  def initialize
+  def initialize(starting_balance = 0)
     $transactions = []
-    $running_total_counter = 0
+    $running_total_counter = starting_balance
   end
 
   def add(transaction)
@@ -30,13 +30,27 @@ class Statement
 
   def format_to_string(transaction)
     date_correct = transaction.show_string_date.gsub "-", "/"
-    amount = (transaction.show_amount.round(2)) + 0.00
-    total = (running_total(transaction).round(2)) + 0.00
+    amount = sprintf "%.2f", transaction.show_amount
+    total = sprintf "%.2f", running_total(transaction)
     if transaction.show_transaction_type == "credit"
       "#{date_correct} || #{amount} || || #{total}"
     else
       "#{date_correct} || || #{amount} || #{total}"
     end
+  end
+
+  def show_balance
+    $running_total_counter
+  end
+
+  def produce_statement
+    sort_by_date
+    string_transactions_array =
+      $transactions.map do |transaction|
+        format_to_string(transaction)
+        binding.irb
+      end
+    string_transactions_array
     # binding.irb
   end
 end

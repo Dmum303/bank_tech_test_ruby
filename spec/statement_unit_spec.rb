@@ -69,21 +69,85 @@ RSpec.describe Statement do
       expect(statement.running_total(fake_transaction_2)).to eq 510
     end
 
-    # Do I want to bother with failing inputs on statement class? Nah I've sanitized
-    # Maybe have a method to set carried over balance?
-
-    it "Formats object into string" do
+    it "Formats transaction object into string" do
       fake_transaction =
         double :fake_transaction,
                show_amount: 300,
                show_string_date: "03-04-2022",
-               date_to_object: Date.strptime("03-04-2022", "%d-%m-%Y"),
                show_transaction_type: "credit"
       statement = Statement.new
       expect(
         statement.format_to_string(fake_transaction)
       ).to eq "03/04/2022 || 300.00 || || 300.00"
     end
+
+    it "Formats transaction object into string" do
+      fake_transaction =
+        double :fake_transaction,
+               show_amount: 0.65,
+               show_string_date: "05-03-2023",
+               show_transaction_type: "credit"
+      statement = Statement.new
+      expect(
+        statement.format_to_string(fake_transaction)
+      ).to eq "05/03/2023 || 0.65 || || 0.65"
+    end
+
+    it "Formats transaction object into string" do
+      fake_transaction =
+        double :fake_transaction,
+               show_amount: 50.76,
+               show_string_date: "10-10-1908",
+               show_transaction_type: "debit"
+      statement = Statement.new
+      expect(
+        statement.format_to_string(fake_transaction)
+      ).to eq "10/10/1908 || || 50.76 || -50.76"
+    end
+  end
+
+  it "Can add a optional starting bank balance" do
+    statement = Statement.new(2000)
+    expect(statement.show_balance).to eq 2000
+    statement_2 = Statement.new()
+    expect(statement_2.show_balance).to eq 0
+  end
+
+  it "Takes array of transaction objects and converts to array of strings" do
+    fake_transaction =
+      double :fake_transaction,
+             show_amount: 300,
+             show_string_date: "03-04-2022",
+             date_to_object: Date.strptime("03-04-2022", "%d-%m-%Y"),
+             show_transaction_type: "credit"
+
+    statement = Statement.new
+    statement.add(fake_transaction)
+    expect(
+      statement.produce_statement[0]
+    ).to eq "03/04/2022 || 300.00 || || 300.00"
+  end
+
+  it "Takes array of transaction objects and converts to array of strings" do
+    fake_transaction =
+      double :fake_transaction,
+             show_amount: 300,
+             show_string_date: "03-04-2022",
+             date_to_object: Date.strptime("03-04-2022", "%d-%m-%Y"),
+             show_transaction_type: "credit"
+    fake_transaction_2 =
+      double :fake_transaction_2,
+             show_amount: 50.50,
+             show_string_date: "01-10-2021",
+             date_to_object: Date.strptime("01-10-2021", "%d-%m-%Y"),
+             show_transaction_type: "credit"
+    statement = Statement.new(250.65)
+    statement.add(fake_transaction)
+    statement.add(fake_transaction_2)
+    statement.add(fake_transaction_2)
+    expect(
+      statement.produce_statement[-1]
+    ).to eq "03/04/2022 || 300.00 || || 449.65"
   end
 end
 
