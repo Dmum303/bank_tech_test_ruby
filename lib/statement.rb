@@ -47,7 +47,7 @@ class Statement
     sort_by_date
     string_transactions_array =
       @transactions.map { |transaction| format_to_string(transaction) }
-    string_transactions_array
+    string_transactions_array.reverse
   end
 
   def return_statement

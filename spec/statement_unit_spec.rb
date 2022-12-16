@@ -152,7 +152,7 @@ RSpec.describe Statement do
       statement.add(fake_transaction_2)
       expect(
         statement.produce_statement[2]
-      ).to eq "03/04/2022 || 300.00 || || 449.23"
+      ).to eq "01/10/2021 || || 50.50 || 199.73"
     end
 
     it "Returns statement as string with correct header" do
@@ -187,7 +187,7 @@ RSpec.describe Statement do
       statement.add(fake_transaction)
       expect(
         statement.return_statement
-      ).to eq "date || credit || debit || balance\n01/10/2021 || || 50.50 || 949.50\n03/04/2022 || 300.00 || || 1249.50"
+      ).to eq "date || credit || debit || balance\n03/04/2022 || 300.00 || || 1249.50\n01/10/2021 || || 50.50 || 949.50"
     end
   end
 end

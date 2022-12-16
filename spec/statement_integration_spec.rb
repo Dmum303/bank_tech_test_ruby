@@ -27,16 +27,16 @@ RSpec.describe Statement do
       transaction = Transaction.new(500, "14-01-2023", "debit")
       transaction_2 = Transaction.new(2000, "13-01-2023", "credit")
       transaction_3 = Transaction.new(1000, "10-01-2023", "credit")
-      transaction = Transaction.new(500, "14-01-2023", "debit")
       transaction.check_all_data_input
+      transaction_2.check_all_data_input
+      transaction_3.check_all_data_input
       statement = Statement.new
       statement.add(transaction)
-
       statement.add(transaction_2)
       statement.add(transaction_3)
       expect(
         statement.return_statement
-      ).to eq "date || credit || debit || balance\n01/12/2021 || || 300.00 || 700.00"
+      ).to eq "date || credit || debit || balance\n14/01/2023 || || 500.00 || 2500.00\n13/01/2023 || 2000.00 || || 3000.00\n10/01/2023 || 1000.00 || || 1000.00"
     end
   end
 end
