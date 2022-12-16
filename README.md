@@ -4,38 +4,8 @@
 
 - This project is written in ruby and tested with rspec
 - First clone this directory to your local machine and cd into the project folder
-
-### If you don't have ruby version manager installed
-
-- https://rvm.io/ to install RVM.
-
-### Then, get the latest Ruby, run:
-
-- rvm get stable
-- rvm use ruby --latest --install --default
-- gem install bundler
-- bundle init
-
-### Make sure you can test using rspec
-
-- bundle add rspec
-- rspec --init
-
-### To run tests: cd into the spec directory and run command:
-
-- rspec ../spec
-
-or
-Setup
-If you don't already have it, clone the skills workshop repository.
-
-Do a git pull to make sure you have an up-to-date version of the repository.
-
-cd into the student-mocking-workshop directory.
-
-Run bundle install.
-
-Run the tests with rspec.
+- Run bundle install.
+- Run the tests with rspec.
 
 ## Project Requirements
 
