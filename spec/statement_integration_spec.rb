@@ -27,9 +27,11 @@ RSpec.describe Statement do
       transaction = Transaction.new(500, "14-01-2023", "debit")
       transaction_2 = Transaction.new(2000, "13-01-2023", "credit")
       transaction_3 = Transaction.new(1000, "10-01-2023", "credit")
+      transaction = Transaction.new(500, "14-01-2023", "debit")
       transaction.check_all_data_input
-      statement = Statement.new(3000)
+      statement = Statement.new
       statement.add(transaction)
+
       statement.add(transaction_2)
       statement.add(transaction_3)
       expect(
