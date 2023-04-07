@@ -66,8 +66,3 @@ date || credit || debit || balance
 
   this class will only take transaction class objects and will throw an error if other info is added
 
-## things to look up
-
-doubles
-errors
-how to check if something is of a certain class
